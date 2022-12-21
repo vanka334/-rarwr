@@ -5,6 +5,7 @@ namespace pract8
 {
     internal class Program
     {
+        public static List<Tablica> list = new List<Tablica>();
         public static string name;
         public static int err = 0;
         public static double timer = 0;
@@ -22,6 +23,7 @@ namespace pract8
                 {
                     Console.WriteLine("Введите имя");
                     name = Console.ReadLine();
+
                     p.listik();
                     Timer.timer();
                         GorR.Reading();
@@ -29,13 +31,14 @@ namespace pract8
                 }
                 else if (key.Key == ConsoleKey.F10)
                 {
-                    foreach (var c in Tablica.tabs)
+                    Ser.Deserialize();
+                    foreach (Tablica c in list)
                     {
-                        Console.WriteLine(c);
+                        Console.WriteLine("Имя: "+c.nameid + "       Время: "+ c.time + "       Ошибки: "+ c.errors);
 
 
                     }
-                    if (Tablica.tabs.Count == 0)
+                    if (list.Count == 0)
                     {
                         Console.WriteLine("Нет никого(");
 
@@ -45,7 +48,9 @@ namespace pract8
 
                 }
                 Tablica person = new(name, timer, err);
-                Tablica.tabs.Add(person);
+                list.Add(person);
+                
+                Ser.Serelization(list);
 
             }
 
